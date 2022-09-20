@@ -40,6 +40,7 @@ prepare_and_submit_reads_to_ENA.R| a documentation of the demultiplexing of the 
 
 
 Link to the ENA project containing demultiplexed samples:
-prepare_and_submit_reads_to_ENA.R
+https://www.ebi.ac.uk/ena/browser/view/PRJEB56039
+
 
 Link to Dryad containing the un-demultiplexed paired read files:
