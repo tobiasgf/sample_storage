@@ -20,7 +20,8 @@ R|contains some scripts for statistical analyses and plot making
 Raw_reads|the directory for the raw fastq reads and demultiplexed reads (both needs downloading), as well as datafile necessary for the demultiplexing
 Ressources|contains some external ressources for the habitat classification as well as reference datasets for the taxonomic annotation
 Tables|output tables for publication
-Taxonomic_assignments| contains info and tables related to the taxonomic annotation of reads.
+Taxonomic_assignments| contains info and tables related to the taxonomic annotation of reads
+ENA_submission|files associated with the preparation and upload of reads to ENA
 
 The following scripts are used in the listed order to do the analyses, statistics and plotting of the study  
 
