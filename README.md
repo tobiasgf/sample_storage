@@ -4,7 +4,7 @@ This repository (R project) contains all data and scripts necessary to run the a
 The intention is that all data is available to jump into the analyses at any given step (as intermediate data is available). All you need to do is to download the R project including data from this GitHub repository (https://github.com/tobiasgf/sample_storage).
 If you wish to start from raw un-demultiplexed data, you also need to download the raw Illumina data from Dryad (LINK)
 If you want to start from sample-wise demultiplexed paired reads, you need to download these from ENA/SRA (https://www.ebi.ac.uk/ena/browser/view/PRJEB56039).
-Most of the analyses are carried out in R (with standard packages), but there are also some command line steps. To be able tu run all analyses, you need some additional tools installed (ITSx, cutadapt, snasltx, sickle)
+Most of the analyses are carried out in R (with standard packages), but there are also some command line steps. To be able to run all analyses, you need some additional tools installed (ITSx, cutadapt, blastx, sickle)
 
 *An overview and description of the directories and scripts in this repository*  
 
