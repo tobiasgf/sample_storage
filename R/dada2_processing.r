@@ -279,18 +279,28 @@ dada2_tgf <- function(trunc_reads = TRUE, cut_r1 = 230, cut_r2 = 180, minimum_re
  }
  
  if(use_sickle){
+  pwd <- getwd()
+  main_path <- pwd
+  
+  if(!file_test("-d", file.path(main_path, "DADA2_SS"))) stop("DADA2_SS directory not in current directory!")
+  if(!file_test("-d", file.path(main_path, "DADA2_AS"))) stop("DADA2_AS directory not in current directory!")
+  
   #Filtering the "Sense"-reads.
   path <- file.path(main_path, "DADA2_SS")
+  
   fns <- list.files(path)
   fastqs <- fns[grepl("fastq$", fns)]
   fastqs <- sort(fastqs)
+  
   fnFs <- fastqs[grepl("_R1.", fastqs)]
   fnRs <- fastqs[grepl("_R2.", fastqs)]
   sample.names <- sapply(strsplit(fnFs, "_R1"), `[`, 1)
+  
   fnFs <- file.path(path, fnFs)
   fnRs <- file.path(path, fnRs)
   match_path <- file.path(path, "filtered")
   if(!file_test("-d", match_path)) dir.create(match_path)
+  
   filtFs <- file.path(match_path, paste0(sample.names, "_F_filtered.fastq"))
   filtRs <- file.path(match_path, paste0(sample.names, "_R_filtered.fastq"))
   
@@ -436,39 +446,6 @@ dada2_tgf <- function(trunc_reads = TRUE, cut_r1 = 230, cut_r2 = 180, minimum_re
   saveRDS(seqtab_AS,stAS)
   saveRDS(seqtab.nochim_AS,stnsAS)
   
-  #Define a function for combining two or more tables, collapsing samples with similar names:  
-  sumSequenceTables <- function(table1, table2, ..., orderBy = "abundance") {
-   # Combine passed tables into a list
-   tables <- list(table1, table2)
-   tables <- c(tables, list(...))
-   # Validate tables
-   if(!(all(sapply(tables, dada2:::is.sequence.table)))) {
-    stop("At least two valid sequence tables, and no invalid objects, are expected.")
-   }
-   sample.names <- rownames(tables[[1]])
-   for(i in seq(2, length(tables))) {
-    sample.names <- c(sample.names, rownames(tables[[i]]))
-   }
-   seqs <- unique(c(sapply(tables, colnames), recursive=TRUE))
-   sams <- unique(sample.names)
-   # Make merged table
-   rval <- matrix(0L, nrow=length(sams), ncol=length(seqs))
-   rownames(rval) <- sams
-   colnames(rval) <- seqs
-   for(tab in tables) {
-    rval[rownames(tab), colnames(tab)] <- rval[rownames(tab), colnames(tab)] + tab
-   }
-   # Order columns
-   if(!is.null(orderBy)) {
-    if(orderBy == "abundance") {
-     rval <- rval[,order(colSums(rval), decreasing=TRUE),drop=FALSE]
-    } else if(orderBy == "nsamples") {
-     rval <- rval[,order(colSums(rval>0), decreasing=TRUE),drop=FALSE]
-    }
-   }
-   rval
-  }
-  
   stAS <- file.path(main_path,"seqtab_AS_RDS")
   stnsAS <- file.path(main_path,"seqtab.nochim_AS_RDS")
   stSS <- file.path(main_path,"seqtab_SS_RDS")
@@ -483,6 +460,17 @@ dada2_tgf <- function(trunc_reads = TRUE, cut_r1 = 230, cut_r2 = 180, minimum_re
   stnsBoth <- file.path(main_path,"seqtab.nochim_Both_RDS")
   saveRDS(total_sumtable,stBoth)
   saveRDS(total_nochim_sumtable,stnsBoth)
+  
+  end.time <- Sys.time()
+  
+  time.taken <- end.time - start.time
+  
+  settings <- list(trunc_reads = trunc_reads, cut_r1 = cut_r1, cut_r2 = cut_r2, minimum_reads = minimum_reads, plotting = plotting)
+  
+  result <- list(dada2_table_raw = total_sumtable, dada2_table_nochimeras = total_nochim_sumtable, SStrack = NA, AStrack = NA, total_stat = NA, otu_stat = NA, time.taken = time.taken, settings = settings)
+  
+  return(result)
+  
  }
  
  
