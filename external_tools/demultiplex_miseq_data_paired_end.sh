@@ -32,7 +32,7 @@ while read INPUT_R1 INPUT_R2 TAGS PRIMER_F PRIMER_R MIN_LENGTH ; do
     ## straight strand (forward primer in R1)
     LOG="DADA2_SS/${TAG_NAME}.log"
     FINAL1_FASTQ="DADA2_SS/${TAG_NAME}_R1.fastq"
-    FINAL2_FASTQ="DADA2_AS/${TAG_NAME}_R2.fastq"
+    FINAL2_FASTQ="DADA2_SS/${TAG_NAME}_R2.fastq"
 
     # Trim tags, forward & reverse primers
     ${CUTADAPT} -O $MINTAGOVERLAP -e 0 -g ${FTFP} -G ${RTRP} -o T1.fastq -p T2.fastq $INPUT_R1 $INPUT_R2 --cores 0
