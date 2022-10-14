@@ -2,7 +2,7 @@
 ___
 This repository (R project) contains all data and scripts necessary to run the analyses and produce the figures from the study Treated like dirt: Robust forensic and ecological inferences from soil eDNA after challenging sample storage (Frøslev et al. (2022) - published in Environmental DNA).
 The intention is that all data is available to jump into the analyses at any given step (as intermediate data is available). All you need to do is to download the R project including data from this GitHub repository (https://github.com/tobiasgf/sample_storage).
-If you wish to start from raw un-demultiplexed data, you also need to download the raw Illumina data from Dryad (doi:10.5061/dryad.k0p2ngfbs)
+If you wish to start from raw un-demultiplexed data, you also need to download the raw Illumina data from Dryad (https://doi.org/10.5061/dryad.k0p2ngfbs)
 If you want to start from sample-wise demultiplexed paired reads, you need to download these from ENA/SRA (https://www.ebi.ac.uk/ena/browser/view/PRJEB56039).
 Most of the analyses are carried out in R (with standard packages), but there are also some command line steps. To be able to run all analyses, you need some additional tools installed (ITSx, cutadapt, blastx, sickle)
 
@@ -44,3 +44,5 @@ https://www.ebi.ac.uk/ena/browser/view/PRJEB56039
 
 
 Link to Dryad containing the un-demultiplexed paired read files:
+https://doi.org/10.5061/dryad.k0p2ngfbs
+
